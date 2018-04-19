@@ -119,8 +119,13 @@ public class MHeap<T extends Comparable<T>> {
     }
 
     public void print() {
-        if (list.isEmpty()) return;
+        if (list.isEmpty()) {
+
+            return;
+        }
+        System.out.println();
         new HeapPrinter(list);
+        System.out.println();
     }
 
 
