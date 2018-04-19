@@ -1,6 +1,7 @@
 package com.szachnowicz.Array;
 
 import com.szachnowicz.resulsts.IMethods;
+import org.apache.poi.ss.formula.functions.T;
 
 import java.util.Arrays;
 
@@ -8,8 +9,21 @@ public class Array implements IMethods<Integer> {
 
     public int array[] = new int[0];
 
+    public int size() {
+        return array.length;
+    }
+
     public void print() {
         System.out.println(Arrays.toString(array));
+    }
+
+    public boolean find(Integer item) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != item) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -21,7 +35,7 @@ public class Array implements IMethods<Integer> {
         }
         tempArr[array.length] = item;
         array = tempArr;
-       
+
 
     }
 
@@ -33,7 +47,7 @@ public class Array implements IMethods<Integer> {
             tempArr[i + 1] = array[i];
         }
         array = tempArr;
-       
+
     }
 
     @Override
@@ -53,7 +67,7 @@ public class Array implements IMethods<Integer> {
         }
 
         array = tempArr;
-       
+
 
     }
 
@@ -66,7 +80,7 @@ public class Array implements IMethods<Integer> {
         }
 
         array = tempArr;
-       
+
 
     }
 
@@ -75,11 +89,10 @@ public class Array implements IMethods<Integer> {
         int tempArr[] = new int[array.length - 1];
 
         for (int i = 1; i < array.length; i++) {
-            tempArr[i-1] = array[i];
+            tempArr[i - 1] = array[i];
         }
 
         array = tempArr;
-       
 
 
     }
@@ -104,9 +117,6 @@ public class Array implements IMethods<Integer> {
         array = tempArr;
 
     }
-
-
-
 
 
     @Override

@@ -1,5 +1,7 @@
-package com.szachnowicz.bHeap;
+package com.szachnowicz.mainTests;
 
+import com.szachnowicz.DoubleLinkedList.TimeMessure;
+import com.szachnowicz.bHeap.MHeap;
 import com.szachnowicz.resulsts.AbstractExcellTest;
 import com.szachnowicz.resulsts.Result;
 import org.junit.Test;
@@ -10,7 +12,8 @@ public class HeapTest extends AbstractExcellTest {
 
 
     public HeapTest() {
-        super(50000, "Kopiec Binarny");
+        super("Kopiec Binarny");
+
 
     }
 
@@ -19,37 +22,39 @@ public class HeapTest extends AbstractExcellTest {
         Result insertResult = new Result("Dodawanie elementu");
         Result resultDelete = new Result("Usuwanie elementu");
         Result searchResult = new Result("Szukanie losowego elementu");
-        long start, end, duration;
 
 
         for (int i = 0; i < 10; i++) {
             int testTimes = TEST_TIMES * (i + 1);
-            // insert test
-            start = System.nanoTime();
+            // insert Test
+
             for (int j = 0; j < testTimes; j++) {
+                time.start();
                 heap.insert(radnomInt.get(j));
+                time.end();
             }
-            end = System.nanoTime();
-            duration = (end - start) / 1000000;
-            insertResult.addMessureTime(testTimes, duration);
-//            //find
-            start = System.nanoTime();
+
+            insertResult.addMessureTime(testTimes, time.getDuration());
+            time.reset();
+
             for (int j = 0; j < testTimes; j++) {
                 Integer rValue = radnomInt.get((int) (Math.random() * radnomInt.size()));
+                time.start();
                 Integer integer = heap.find(rValue);
+                time.end();
             }
-            end = System.nanoTime();
-            duration = (end - start) / 1000000;
-            searchResult.addMessureTime(testTimes, duration);
 
-            // delete test
-            start = System.nanoTime();
+            searchResult.addMessureTime(testTimes, time.getDuration());
+            time.reset();
+            // delete Test
+
             for (int j = 0; j < testTimes; j++) {
+                time.start();
                 heap.insert(radnomInt.get(j));
+                time.end();
             }
-            end = System.nanoTime();
-            duration = (end - start) / 1000000;
-            resultDelete.addMessureTime(testTimes, duration);
+
+            resultDelete.addMessureTime(testTimes, time.getDuration());
 
 
         }

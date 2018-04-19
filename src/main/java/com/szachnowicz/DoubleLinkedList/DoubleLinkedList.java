@@ -5,7 +5,7 @@ import com.szachnowicz.resulsts.IMethods;
 import java.util.NoSuchElementException;
 
 public class DoubleLinkedList<T> implements IMethods<T> {
-    int size = 0;
+    public int size = 0;
 
     private Element head;
     private Element tail;

@@ -1,5 +1,7 @@
-package com.szachnowicz.RBTree;
+package com.szachnowicz.mainTests;
 
+import com.szachnowicz.DoubleLinkedList.TimeMessure;
+import com.szachnowicz.RBTree.RedBlackTree;
 import com.szachnowicz.resulsts.ExcelParser;
 import com.szachnowicz.resulsts.Result;
 import org.junit.AfterClass;
@@ -13,18 +15,19 @@ import java.util.Random;
 
 public class RedBlackTreeTest {
 
-    private static final int TEST_TIMES = 500000;
+    private static final int TEST_TIMES = 1000;
     private static List<Integer> radnomInt = new ArrayList<>();
     private static Random random;
+    private TimeMessure time = new TimeMessure();
+
 
     @BeforeClass
     public static void setUpBc() throws Exception {
 
-         random = new Random();
-        for (int i = 0; i <  TEST_TIMES*10; i++) {
+        random = new Random();
+        for (int i = 0; i < TEST_TIMES * 10; i++) {
             radnomInt.add(random.nextInt(10000));
         }
-
 
     }
 
@@ -51,46 +54,46 @@ public class RedBlackTreeTest {
 
 
             int testTimes = TEST_TIMES * (i + 1);
-            long startTime = System.nanoTime();
+
             for (int k = 0; k < testTimes; k++) {
                 Integer key = radnomInt.get(k);
+                time.start();
                 tree.insert(key);
+                time.end();
             }
+            result.addMessureTime(testTimes, time.getDuration());
+            time.reset();
+            /////////////////////////////////////////////////////////////////////
 
-            long endTime = System.nanoTime();
-            long duration = (endTime - startTime) / 1000000;
-            result.addMessureTime(testTimes, duration);
-           /////////////////////////////////////////////////////////////////////
-
-            startTime = System.nanoTime();
             for (int k = 0; k < testTimes; k++) {
                 int rIndex = random.nextInt(testTimes);
                 Integer key = radnomInt.get(rIndex);
+                time.start();
                 tree.search(key);
+                time.end();
 
             }
-            endTime = System.nanoTime();
-            duration = (endTime - startTime) / 1000000;
-            searchDelete.addMessureTime(testTimes, duration);
 
-           /////////////////////////////////////////////////////////////////////
-            startTime = System.nanoTime();
+            searchDelete.addMessureTime(testTimes, time.getDuration());
+            time.reset();
+            /////////////////////////////////////////////////////////////////////
+
             for (int k = 0; k < testTimes; k++) {
                 Integer key = radnomInt.get(k);
 
                 try {
+                    time.start();
                     tree.delete(key);
+                    time.end();
                 } catch (NullPointerException e) {
                     System.out.println(key);
                 }
 
             }
-            endTime = System.nanoTime();
-            duration = (endTime - startTime) / 1000000;
-            resultDelete.addMessureTime(testTimes, duration);
+            resultDelete.addMessureTime(testTimes, time.getDuration());
         }
 
-    /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
         results.add(result);
         results.add(resultDelete);
         results.add(searchDelete);

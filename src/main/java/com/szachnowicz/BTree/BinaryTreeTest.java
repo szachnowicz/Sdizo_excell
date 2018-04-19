@@ -1,5 +1,6 @@
 package com.szachnowicz.BTree;
 
+import com.szachnowicz.DoubleLinkedList.TimeMessure;
 import com.szachnowicz.resulsts.AbstractExcellTest;
 import com.szachnowicz.resulsts.ExcelParser;
 import com.szachnowicz.resulsts.Result;
@@ -16,9 +17,10 @@ public class BinaryTreeTest extends AbstractExcellTest {
 
 
     private BinaryTree<Integer> binaryTree;
+    private TimeMessure time;
 
     public BinaryTreeTest() {
-        super(100,"BTree");
+        super( "BTree");
     }
 
 
@@ -40,39 +42,39 @@ public class BinaryTreeTest extends AbstractExcellTest {
 
 
             int testTimes = TEST_TIMES * (i + 1);
-            long startTime = System.nanoTime();
+            time = new TimeMessure();
             for (int k = 0; k < testTimes; k++) {
+                time.start();
                 binaryTree.addNode(radnomInt.get(k));
-//                binaryTree.inOrderTraverseTree(binaryTree.root);
+                time.end();
             }
-            long endTime = System.nanoTime();
-            long duration = (endTime - startTime) / 1000000;
-            result.addMessureTime(testTimes, duration);
 
 
-            startTime = System.nanoTime();
+            result.addMessureTime(testTimes, time.getDuration());
+
+            time = new TimeMessure();
             for (int k = 0; k < testTimes; k++) {
                 Integer value = radnomInt.get(random.nextInt(radnomInt.size()));
+                time.start();
                 binaryTree.findNote(value);
-//                binaryTree.inOrderTraverseTree(binaryTree.root);
+                time.end();
             }
-            endTime = System.nanoTime();
-            duration = (endTime - startTime) / 1000000;
-            searchResult.addMessureTime(testTimes, duration);
 
 
-            startTime = System.nanoTime();
+            searchResult.addMessureTime(testTimes, time.getDuration());
+            time = new TimeMessure();
+
             for (int k = 0; k < testTimes; k++) {
+                time.start();
                 binaryTree.remove(radnomInt.get(k));
-//                binaryTree.inOrderTraverseTree(binaryTree.root);
+                time.end();
             }
-            endTime = System.nanoTime();
-            duration = (endTime - startTime) / 1000000;
-            resultDelete.addMessureTime(testTimes, duration);
+
+
+            resultDelete.addMessureTime(testTimes, time.getDuration());
         }
 
 
-//        BTreePrinter.printNode(binaryTree.root);
         results.add(result);
         results.add(resultDelete);
         results.add(searchResult);
@@ -91,31 +93,30 @@ public class BinaryTreeTest extends AbstractExcellTest {
 
 
             int testTimes = TEST_TIMES * (i + 1);
-            long startTime = System.nanoTime();
+
             for (int k = 0; k < testTimes; k++) {
                 binaryTree.addNode(radnomInt.get(k));
                 binaryTree.inOrderTraverseTree(binaryTree.root);
             }
-            long endTime = System.nanoTime();
-            long duration = (endTime - startTime) / 1000000;
-            result.addMessureTime(testTimes, duration);
 
-            startTime = System.nanoTime();
+
+            result.addMessureTime(testTimes, time.getDuration());
+
+
             for (int k = 0; k < testTimes; k++) {
                 binaryTree.remove(radnomInt.get(k));
                 binaryTree.inOrderTraverseTree(binaryTree.root);
             }
-            endTime = System.nanoTime();
-            duration = (endTime - startTime) / 1000000;
-            resultDelete.addMessureTime(testTimes, duration);
+
+
+            resultDelete.addMessureTime(testTimes, time.getDuration());
         }
 
-//        BTreePrinter.printNode(binaryTree.root);
+
         results.add(result);
         results.add(resultDelete);
 
     }
-
 
 
 }

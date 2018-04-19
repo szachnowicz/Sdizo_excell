@@ -19,7 +19,7 @@ public class Result {
 
     public void addMessureTime(int instance, long time) {
         instanceList.add(instance);
-        timeList.add(time);
+        timeList.add(time / instance);
     }
 
     public void setOperationTested(String operationTested) {

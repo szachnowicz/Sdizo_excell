@@ -1,17 +1,25 @@
 package com.szachnowicz.resulsts;
 
+import com.szachnowicz.Array.Array;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.charts.ChartDataSource;
+import org.apache.poi.ss.usermodel.charts.DataSources;
+import org.apache.poi.ss.usermodel.charts.ScatterChartData;
+import org.apache.poi.xssf.usermodel.XSSFChart;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.charts.XSSFScatterChartData;
+import org.openxmlformats.schemas.drawingml.x2006.chart.*;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ExcelParser {
     private static List<Result> timeResults = new ArrayList<>();
-
-
 
 
     public void createFile(String sheetName, List<Result> resultList) {
@@ -32,23 +40,43 @@ public class ExcelParser {
         // Create a Row
         Row headerRow = sheet.createRow(rowNum);
 
+        int counter = 0;
+        for (Result second : resultList) {
 
-        for (Result result : resultList) {
             Row row = sheet.createRow(rowNum++);
             Cell cell = row.createCell(0);
-            cell.setCellValue(result.getOperationTested());
-            row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue("Ilosc opreacji");
-            row.createCell(1).setCellValue("Czas [ms]");
 
-
-            for (int i = 0; i < result.timeList.size(); i++) {
-                row = sheet.createRow(rowNum++);
-                row.createCell(0).setCellValue(result.instanceList.get(i));
-                row.createCell(1).setCellValue(result.timeList.get(i));
-
+            cell.setCellValue(second.getOperationTested());
+            if (counter > 0) {
+                Result first = resultList.get(counter - 1);
+                row.createCell(4).setCellValue("Ilosc opreacji");
+                row.createCell(5).setCellValue(first.getOperationTested());
+                row.createCell(6).setCellValue(second.getOperationTested());
             }
 
+            row = sheet.createRow(rowNum++);
+
+            row.createCell(0).setCellValue("Ilosc opreacji");
+            row.createCell(1).setCellValue("Czas []");
+
+
+            for (int i = 0; i < second.timeList.size(); i++) {
+
+
+                if (counter > 0) {
+
+                    Result first = resultList.get(counter - 1);
+
+                    row.createCell(4).setCellValue(second.instanceList.get(i));
+                    row.createCell(5).setCellValue(first.timeList.get(i));
+                    row.createCell(6).setCellValue(second.timeList.get(i));
+
+                }
+                row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(second.instanceList.get(i));
+                row.createCell(1).setCellValue(second.timeList.get(i));
+
+            }
 
 
             /// adding extra space
@@ -57,10 +85,11 @@ public class ExcelParser {
             row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(" ");
 
+            counter++;
         }
 
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 6; i++) {
             sheet.autoSizeColumn(i);
         }
         // Write the output to a file
@@ -74,10 +103,15 @@ public class ExcelParser {
             e.printStackTrace();
             System.out.println("ERRROR");
 
+
         }
-
-
     }
-
-
 }
+
+
+
+
+
+
+
+
