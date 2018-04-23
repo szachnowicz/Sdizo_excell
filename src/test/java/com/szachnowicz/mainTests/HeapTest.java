@@ -1,5 +1,6 @@
 package com.szachnowicz.mainTests;
 
+import com.szachnowicz.Array.Array;
 import com.szachnowicz.DoubleLinkedList.TimeMessure;
 import com.szachnowicz.bHeap.MHeap;
 import com.szachnowicz.resulsts.AbstractExcellTest;
@@ -16,6 +17,32 @@ public class HeapTest extends AbstractExcellTest {
 
 
     }
+
+
+    @Test
+    public void singleStactureTest() {
+        Result deleteBegin = new Result("Usuwanie korzenia");
+        for (int i = 0; i < 10; i++) {
+            heap = new MHeap<>();
+            int testTimes = TEST_TIMES * (i + 1);
+
+
+            for (int j = 0; j < testTimes; j++) {
+                heap.insert(radnomInt.get(j));
+            }
+
+            time.reset();
+            for (int k = 0; k < testTimes; k++) {
+                time.start();
+                heap.deleteRoot();
+                time.end();
+                heap.insert(radnomInt.get(k));
+            }
+            deleteBegin.addMessureTime(testTimes, time.getDuration());
+        }
+        results.add(deleteBegin);
+    }
+
 
     @Test
     public void insertTestAndDeleteTest() {

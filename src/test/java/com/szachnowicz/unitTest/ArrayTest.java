@@ -31,11 +31,18 @@ public class ArrayTest {
 
 
         for (int i = 0; i < 10; i++) {
-            if(i%2==0)
+            if (i % 2 == 0)
                 array.deleteAtBegin();
-            if(i%2==1)
-            array.deleteAtEnd();
+            if (i % 2 == 1)
+                array.deleteAtEnd();
         }
         array.print();
+        array.deleteAtEnd();
+        array.addAtBegin(4);
+        array.addAtBegin(14);
+        array.addAtBegin(44);
+        System.out.println(array.find(44));
+        array.print();
+
     }
 }

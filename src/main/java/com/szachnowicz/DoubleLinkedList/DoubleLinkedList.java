@@ -84,6 +84,7 @@ public class DoubleLinkedList<T> implements IMethods<T> {
 
     @Override
     public void deleteAtEnd() {
+        if (size == 1) return;
         Element tmp = tail;
         tail = tail.prev;
         size--;

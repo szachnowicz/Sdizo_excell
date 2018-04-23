@@ -42,9 +42,33 @@ public class DoubleLinkedListTest extends AbstractExcellTest {
 
 
     @Test
+    public void singleStactureTest() {
+        Result deleteBegin = new Result("Usuwanie z końca");
+        for (int i = 0; i < 10; i++) {
+            list = new DoubleLinkedList<>();
+            int testTimes = TEST_TIMES * (i + 1);
+
+
+            for (int j = 0; j < testTimes; j++) {
+                list.addAtBegin(radnomInt.get(j));
+            }
+
+            time.reset();
+            for (int k = 0; k < testTimes; k++) {
+                time.start();
+                list.deleteAtEnd();
+                time.end();
+                list.addAtBegin(radnomInt.get(k));
+            }
+            deleteBegin.addMessureTime(testTimes, time.getDuration());
+        }
+        results.add(deleteBegin);
+    }
+
+    @Test
     public void addBeginTest() {
         Result result = new Result("Dodawanie z początku");
-        Result resultDelete = new Result("Uswanie z początku");
+        Result resultDelete = new Result("Usuwanie z początku");
         Result serachResults = new Result("Wyszukiwanie");
         for (int i = 0; i < 10; i++) {
             time = new TimeMessure();

@@ -24,11 +24,20 @@ public class ListUnitTest {
 
 
         for (int i = 0; i < 10; i++) {
-            if(i%2==0)
+            if (i % 2 == 0)
                 list.deleteAtBegin();
-            if(i%2==1)
+            if (i % 2 == 1)
                 list.deleteAtEnd();
         }
         list.display();
+
+        list.deleteAtBegin();
+        list.deleteAtEnd();
+        list.addAtBegin(10);
+        list.addAtBegin(15);
+        list.display();
+        System.out.println(list.search(10));
+        System.out.println(list.search(100));
+
     }
 }

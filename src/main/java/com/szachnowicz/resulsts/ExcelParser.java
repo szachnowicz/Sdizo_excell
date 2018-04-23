@@ -49,15 +49,15 @@ public class ExcelParser {
             cell.setCellValue(second.getOperationTested());
             if (counter > 0) {
                 Result first = resultList.get(counter - 1);
-                row.createCell(4).setCellValue("Ilosc opreacji");
+                row.createCell(4).setCellValue("Ilość opreacji");
                 row.createCell(5).setCellValue(first.getOperationTested());
                 row.createCell(6).setCellValue(second.getOperationTested());
             }
 
             row = sheet.createRow(rowNum++);
 
-            row.createCell(0).setCellValue("Ilosc opreacji");
-            row.createCell(1).setCellValue("Czas []");
+            row.createCell(0).setCellValue("Ilość opreacji");
+            row.createCell(1).setCellValue("Czas [ns]");
 
 
             for (int i = 0; i < second.timeList.size(); i++) {

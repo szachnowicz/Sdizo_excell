@@ -73,6 +73,8 @@ public class Array implements IMethods<Integer> {
 
     @Override
     public void deleteAtEnd() {
+        if (array.length <= 0) return;
+
         int tempArr[] = new int[array.length - 1];
 
         for (int i = 0; i < array.length - 1; i++) {
@@ -86,6 +88,7 @@ public class Array implements IMethods<Integer> {
 
     @Override
     public void deleteAtBegin() {
+        if (array.length <= 0) return;
         int tempArr[] = new int[array.length - 1];
 
         for (int i = 1; i < array.length; i++) {

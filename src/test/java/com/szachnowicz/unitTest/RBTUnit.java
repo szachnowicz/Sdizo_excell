@@ -1,33 +1,51 @@
 package com.szachnowicz.unitTest;
 
-import com.szachnowicz.BTree.helpers.BTreePrinter;
 import com.szachnowicz.RBTree.RedBlackTree;
 import org.junit.Test;
 
 public class RBTUnit {
-    RedBlackTree<Integer> list = new RedBlackTree<>();
+    RedBlackTree<Integer> tree = new RedBlackTree<>();
 
     @Test
     public void name() throws Exception {
-        list.insert(1);
-        list.insert(3);
-        list.insert(5);
-        list.insert(7);
-        list.insert(9);
-        System.out.println(list);
-        list.insert(11);
-        list.insert(12);
-        System.out.println(list);
-        list.insert(13);
-        list.insert(14);
-        list.insert(15);
+        tree.insert(1);
+        tree.insert(3);
+        tree.insert(5);
+        tree.insert(7);
+        tree.insert(9);
 
-        System.out.println(list);
+        tree.insert(11);
+        tree.insert(12);
+        tree.insert(13);
+        tree.insert(14);
+        tree.insert(15);
+        System.out.println(tree);
+
+
+        System.out.println(tree.search(14));
+
+        System.out.println(tree);
         for (int i = 0; i < 10; i++) {
-
-            list.delete(i);
+            tree.delete(i);
         }
-        System.out.println(list);
+
+
+        System.out.println(tree);
+        tree.delete(10);
+
+    }
+
+    @Test
+    public void print() throws Exception {
+        tree.insert(10);
+        System.out.println(tree);
+        tree.insert(15);
+        System.out.println(tree);
+        tree.insert(8);
+        System.out.println(tree);
+        tree.insert(100);
+        System.out.println(tree);
+
 
     }
 }

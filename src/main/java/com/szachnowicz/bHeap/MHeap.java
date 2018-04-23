@@ -68,7 +68,7 @@ public class MHeap<T extends Comparable<T>> {
     public T deleteRoot()
             throws NoSuchElementException {
         if (list.size() == 0) {
-            throw new NoSuchElementException();
+            return null;
         }
         if (list.size() == 1) {
             return list.remove(0);

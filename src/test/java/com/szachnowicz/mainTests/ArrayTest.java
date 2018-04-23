@@ -30,6 +30,32 @@ public class ArrayTest extends AbstractExcellTest {
         time = new TimeMessure();
     }
 
+
+    @Test
+    public void singleStactureTest() {
+        Result deleteBegin = new Result("Usuwanie z początku");
+        for (int i = 0; i < 10; i++) {
+            array = new Array();
+            int testTimes = TEST_TIMES * (i + 1);
+
+
+            for (int j = 0; j < testTimes; j++) {
+                array.addAtBegin(radnomInt.get(j));
+            }
+
+            time.reset();
+            for (int k = 0; k < testTimes; k++) {
+                time.start();
+                array.deleteAtEnd();
+                time.end();
+                array.addAtBegin(radnomInt.get(k));
+            }
+            deleteBegin.addMessureTime(testTimes, time.getDuration());
+        }
+        results.add(deleteBegin);
+    }
+
+
     @Test
     public void addBeginTest() {
         Result addBegin = new Result("Dodawanie z początku");

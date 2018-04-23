@@ -41,6 +41,32 @@ public class RedBlackTreeTest {
 
     }
 
+
+    @Test
+    public void singleStactureTest() {
+        Result deleteBegin = new Result("Usuwanie z elementu");
+        for (int i = 0; i < 10; i++) {
+            tree = new RedBlackTree<>();
+            int testTimes = TEST_TIMES * (i + 1);
+
+
+            for (int j = 0; j < testTimes; j++) {
+                tree.insert(radnomInt.get(j));
+            }
+
+            time.reset();
+            for (int k = 0; k < testTimes; k++) {
+                time.start();
+                tree.delete(radnomInt.get(k));
+                time.end();
+                tree.insert(radnomInt.get(k));
+            }
+            deleteBegin.addMessureTime(testTimes, time.getDuration());
+        }
+        results.add(deleteBegin);
+    }
+
+
     @Test
     public void addingNote() throws Exception {
 
@@ -61,6 +87,7 @@ public class RedBlackTreeTest {
                 tree.insert(key);
                 time.end();
             }
+
             result.addMessureTime(testTimes, time.getDuration());
             time.reset();
             /////////////////////////////////////////////////////////////////////
@@ -80,7 +107,6 @@ public class RedBlackTreeTest {
 
             for (int k = 0; k < testTimes; k++) {
                 Integer key = radnomInt.get(k);
-
                 try {
                     time.start();
                     tree.delete(key);
@@ -88,7 +114,6 @@ public class RedBlackTreeTest {
                 } catch (NullPointerException e) {
                     System.out.println(key);
                 }
-
             }
             resultDelete.addMessureTime(testTimes, time.getDuration());
         }
